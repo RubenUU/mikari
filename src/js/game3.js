@@ -126,6 +126,8 @@
       this.player.scale.y+=0.1;
 
       this.points++;
+      this.game.addPoints();
+      
     },
 
     collisionHandlerCool: function (player, sprite) {

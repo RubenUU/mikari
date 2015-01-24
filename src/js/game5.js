@@ -104,18 +104,19 @@
     },
 
     getPoints : function (sprite){
-      sprite.kill();
+      //sprite.kill();
 
       this.player.scale.x+=0.1;
       this.player.scale.y+=0.1;
 
       this.points++;
+      this.game.addPoints();
+
     },
 
     collisionHandlerCool: function (player, sprite) {
 
       if(!this.player.cool){
-        console.log(this.points);
         this.game.state.start('menu');
       }else{
         this.getPoints(sprite);
@@ -126,7 +127,6 @@
     collisionHandlerBad: function (player, sprite) {
 
       if(this.player.cool){
-        console.log(this.points);
         this.game.state.start('menu');
       }else{
         this.getPoints(sprite);
@@ -137,12 +137,12 @@
     collisionHandlerBulletsBad: function (bullet, sprite) {
 
       if(!this.player.cool){
-        console.log(this.points);
         this.game.state.start('menu');
       }
       else{
         sprite.kill();
         bullet.kill();
+        this.getPoints();
       }
       
     },
@@ -157,20 +157,18 @@
 
     update: function () {
 
-    this.game.physics.arcade.collide(this.player, this.bad, this.collisionHandlerBad, null, this);
-    this.game.physics.arcade.collide(this.player, this.cool, this.collisionHandlerCool, null, this);
-    this.game.physics.arcade.collide(this.bullets, this.bad, this.collisionHandlerBulletsBad, null, this);
-    this.game.physics.arcade.collide(this.bullets, this.cool, this.collisionHandlerBulletsCool, null, this);
-    
-    if(this.player.scale.x <= 0 || this.player.scale.y <= 0){
-      console.log(this.points);
-      this.game.state.start('menu');
-    }
+      //this.game.physics.arcade.collide(this.player, this.bad, this.collisionHandlerBad, null, this);
+      //this.game.physics.arcade.collide(this.player, this.cool, this.collisionHandlerCool, null, this);
+      this.game.physics.arcade.collide(this.bullets, this.bad, this.collisionHandlerBulletsBad, null, this);
+      //this.game.physics.arcade.collide(this.bullets, this.cool, this.collisionHandlerBulletsCool, null, this);
+      
+      if(this.player.scale.x <= 0 || this.player.scale.y <= 0){
+        this.game.state.start('menu');
+      }
 
-    this.player.scale.x-=0.003;
-    this.player.scale.y-=0.003;
-
-    
+      this.player.scale.x-=0.003;
+      this.player.scale.y-=0.003;
+      
 
       this.player.rotation = this.game.physics.arcade.angleToPointer(this.player);
 

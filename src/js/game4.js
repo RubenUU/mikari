@@ -125,14 +125,14 @@
       this.player.scale.y+=0.1;
 
       this.points++;
+      this.game.addPoints();
+      
     },
 
     collisionHandlerCool: function (player, sprite) {
 
-      console.log(sprite.enemyType);
 
       if(this.player.power !== sprite.enemyType ){
-        console.log(this.points);
         this.game.state.start('menu');
       }else{
         this.getPoints(sprite);
@@ -143,7 +143,6 @@
     collisionHandlerBad: function (player, sprite) {
 
       if(this.player.cool){
-        console.log(this.points);
         this.game.state.start('menu');
       }else{
         this.getPoints(sprite);
@@ -154,7 +153,6 @@
     collisionHandlerBulletsBad: function (bullet, sprite) {
 
       if(!this.player.cool){
-        console.log(this.points);
         this.game.state.start('menu');
       }
       else{
@@ -167,7 +165,6 @@
     collisionHandlerBulletsCool: function (bullet, sprite) {
 
       if(this.player.cool){
-        console.log(this.points);
         this.game.state.start('menu');
       }
       else{

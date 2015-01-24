@@ -17,4 +17,11 @@ window.onload = function () {
   /* yo phaser:state new-state-files-put-here */
 
   game.state.start('boot');
+
+  game.points = 0;
+
+  game.addPoints = function (){
+    game.points++;
+    //console.log(game.points);
+  }
 };
