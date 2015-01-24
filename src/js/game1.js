@@ -48,7 +48,7 @@
 
       //this.game.stage.backgroundColor = '#0072bc';
 
-      this.player = this.game.add.sprite(400, 300, 'cool');
+      this.player = this.game.add.sprite(this.game.width/2, this.game.height, 'cool');
       this.player.anchor.setTo(0.5, 0.5);
 
       //  Enable Arcade Physics for the this.player

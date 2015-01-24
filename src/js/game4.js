@@ -1,11 +1,11 @@
 (function() {
   'use strict';
 
-  function Game2() {
+  function Game4() {
     this.player = null;
   }
 
-  Game2.prototype = {
+  Game4.prototype = {
 
     create: function () {
       var x = this.game.width / 2
@@ -27,7 +27,7 @@
       this.bullets.setAll('scale.x', 0.5);
       this.bullets.setAll('scale.y', 0.5);
       
-      this.player = this.game.add.sprite(x, y, 'cool');
+      this.player = this.game.add.sprite(x, this.game.height- 50, 'cool');
       this.player.anchor.set(0.5);
 
       this.game.physics.enable(this.player, Phaser.Physics.ARCADE);
@@ -35,18 +35,35 @@
       this.player.body.allowRotation = false;
       this.player.body.immovable = true;
 
-      this.fireRate = 200;
+      this.fireRate = 1000;
       this.nextFire = 0;
 
 
-      this.cool = this.createThings('cool', 30);
-      this.bad = this.createThings('bad', 30);
+      //this.cool = this.createThings('cool', 30);
+      //this.bad = this.createThings('bad', 30);
 
       this.player.cool = true;
+      this.player.power = 'cool';
 
+      this.input.onDown.add(this.onDown, this);
+
+      this.points = 0;
 
     },
 
+    onDown : function () {
+
+      this.player.cool = !this.player.cool;
+
+      if(this.player.cool){
+        this.player.power = 'cool';
+        this.player.loadTexture('cool');
+      }
+      else{
+        this.player.power = 'bad';
+        this.player.loadTexture('bad');
+      }
+    },
     
 
     revive: function(){
@@ -82,19 +99,19 @@
           var s = sprites.create(x, y, spriteName);
         }
         else{
-          var s = sprites.create(0, 200, spriteName);
+          var s = sprites.create(200, 0, spriteName);
         }
         //s.animations.add('spin', [0,1,2,3]);
         //s.play('spin', 20, true);
         this.game.physics.enable(s, Phaser.Physics.ARCADE);
-        s.body.velocity.x = this.game.rnd.integerInRange(-100, 100);
-        s.body.velocity.y = this.game.rnd.integerInRange(-100, 100);
+        //s.body.velocity.x = this.game.rnd.integerInRange(-100, 100);
+        s.body.velocity.y = 100;
       }
 
-      sprites.setAll('body.collideWorldBounds', true);
-      sprites.setAll('body.bounce.x', 0.35);
-      sprites.setAll('body.bounce.y', 0.35);
-      sprites.setAll('body.minBounceVelocity', 0.2);
+      //sprites.setAll('body.collideWorldBounds', true);
+      sprites.setAll('body.bounce.x', 0.2);
+      sprites.setAll('body.bounce.y', 0.2);
+      sprites.setAll('body.minBounceVelocity', 0);
       sprites.setAll('scale.x', 0.5);
       sprites.setAll('scale.y', 0.5);
 
@@ -112,7 +129,9 @@
 
     collisionHandlerCool: function (player, sprite) {
 
-      if(!this.player.cool){
+      console.log(sprite.enemyType);
+
+      if(this.player.power !== sprite.enemyType ){
         console.log(this.points);
         this.game.state.start('menu');
       }else{
@@ -162,15 +181,13 @@
 
     this.game.physics.arcade.collide(this.player, this.bad, this.collisionHandlerBad, null, this);
     this.game.physics.arcade.collide(this.player, this.cool, this.collisionHandlerCool, null, this);
-    this.game.physics.arcade.collide(this.bullets, this.bad, this.collisionHandlerBulletsBad, null, this);
+    this.game.physics.arcade.collide(this.bullets, this.player, this.collisionHandlerCool, null, this);
     this.game.physics.arcade.collide(this.bullets, this.cool, this.collisionHandlerBulletsCool, null, this);
 
       this.player.rotation = this.game.physics.arcade.angleToPointer(this.player);
 
-      if (this.game.input.activePointer.isDown)
-      {
-          this.fire();
-      }
+      this.fireRate-=0.5;
+      this.fire();
 
     },
 
@@ -181,15 +198,20 @@
 
           var bullet = this.bullets.getFirstDead();
 
-          bullet.reset(this.player.x - 8, this.player.y - 8);
+          bullet.reset(this.game.width/2 - 8, 0);
 
-          this.game.physics.arcade.moveToPointer(bullet, 300);
+          //this.game.physics.arcade.moveToPointer(bullet, 300);
+          bullet.body.velocity.y = 300;
+
+          bullet.enemyType = (Math.random() < 0.5) ? 'cool' : 'bad';
+          bullet.loadTexture(bullet.enemyType);
+
       }
     }
 
   };
 
   window['what'] = window['what'] || {};
-  window['what'].Game2 = Game2;
+  window['what'].Game4 = Game4;
 
 }());
