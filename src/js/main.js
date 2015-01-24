@@ -13,6 +13,7 @@ window.onload = function () {
   game.state.add('game3', ns.Game3);
   game.state.add('game4', ns.Game4);
   game.state.add('game5', ns.Game5);
+  game.state.add('game6', ns.Game6);
   /* yo phaser:state new-state-files-put-here */
 
   game.state.start('boot');

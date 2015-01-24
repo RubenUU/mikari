@@ -11,39 +11,6 @@
       var x = this.game.width / 2
         , y = this.game.height / 2;
 
-      //this.player = this.add.sprite(x, y, 'player');
-      //this.player.anchor.setTo(0.5, 0.5);
-      //this.input.onDown.add(this.onInputDown, this);
-
-
-      /*this.game.physics.startSystem(Phaser.Physics.ARCADE);
-
-      this.game.stage.backgroundColor = '#2d2d2d';
-
-      this.balls = this.game.add.group();
-
-      this.balls.createMultiple(250, 'bullets', 0, false);
-
-      this.atari = this.game.add.sprite(300, 450, 'atari');
-
-      this.game.physics.arcade.gravity.y = 400;
-
-      //  Enable physics on everything added to the world so far (the true parameter makes it recurse down into children)
-      this.game.physics.arcade.enable(this.game.world, true);
-
-      this.atari.body.allowGravity = 0;
-      this.atari.body.immovable = true;
-
-      //cursors = this.game.input.keyboard.createCursorKeys();
-
-      //this.game.time.events.loop(150, fire, this);*/
-
-//  Here we create a group, populate it with sprites, give them all a random velocity
-  //  and then check the group against itself for collision
-
-
-
-
       this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
       //this.game.stage.backgroundColor = '#0072bc';
@@ -182,34 +149,11 @@
 
     update: function () {
 
-    this.game.physics.arcade.collide(this.player, this.cool, this.collisionHandlerCool, null, this);
-    this.game.physics.arcade.collide(this.player, this.bad, this.collisionHandlerBad, null, this);
-    //this.game.physics.arcade.collide(this.cool, this.bad, null, null, this);
-//game.physics.arcade.overlap(bullets, veggies, collisionHandler, null, this);
+      this.game.physics.arcade.collide(this.player, this.cool, this.collisionHandlerCool, null, this);
+      this.game.physics.arcade.collide(this.player, this.bad, this.collisionHandlerBad, null, this);
 
+      this.player.rotation = this.game.physics.arcade.moveToPointer(this.player, 60, this.game.input.activePointer, 500);
 
-    this.player.rotation = this.game.physics.arcade.moveToPointer(this.player, 60, this.game.input.activePointer, 500);
-
-
-      //this.player.x = this.game.input.pointer.x;
-      //this.player.y = this.game.input.pointer.y;
-
-      /*var x, y, cx, cy, dx, dy, angle, scale;
-
-      x = this.input.position.x;
-      y = this.input.position.y;
-      cx = this.world.centerX;
-      cy = this.world.centerY;
-
-      angle = Math.atan2(y - cy, x - cx) * (180 / Math.PI);
-      this.player.angle = angle;
-
-      dx = x - cx;
-      dy = y - cy;
-      scale = Math.sqrt(dx * dx + dy * dy) / 100;
-
-      this.player.scale.x = scale * 0.6;
-      this.player.scale.y = scale * 0.6;*/
     },
 
     onInputDown: function () {

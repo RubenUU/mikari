@@ -11,11 +11,9 @@
       var x = this.game.width / 2
         , y = this.game.height / 2;
 
-
-
       this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
-      this.game.stage.backgroundColor = '#313131';
+      //this.game.stage.backgroundColor = '#313131';
 
       this.bullets = this.game.add.group();
       this.bullets.enableBody = true;

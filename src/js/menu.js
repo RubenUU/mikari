@@ -24,8 +24,8 @@
 
       this.input.onDown.add(this.onDown, this);
       //this.game.state.start('game');
-      this.game.maxGames = 6;
-      //this.game.state.start('game2');
+      this.game.maxGames = 7;
+      //this.game.state.start('game3');
       
     },
 
@@ -35,13 +35,28 @@
 
     onDown: function () {
       //this.game.state.start('game2');
+      //this.game.state.start('game5');
+      //
 
       this.game.i++;
+
+
 
       
       if(this.game.i > this.game.maxGames){
         this.game.i = 1;
       }
+
+
+      if(this.game.music){
+        this.game.music.stop();
+      }
+
+      this.game.music = this.game.add.audio(this.game.i, 1, true);
+      this.game.music.play('', 0, 1, true);
+
+
+
       this.game.state.start('game'+this.game.i);
     }
   };
