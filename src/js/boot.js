@@ -12,6 +12,9 @@
     create: function () {
       this.game.input.maxPointers = 1;
 
+      this.game.i=0;
+
+
       if (this.game.device.desktop) {
         this.game.scale.pageAlignHorizontally = true;
       } else {

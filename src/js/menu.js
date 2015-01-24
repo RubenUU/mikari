@@ -13,7 +13,7 @@
         , y = this.game.height / 2;
 
 
-      this.titleTxt = this.add.bitmapText(x, y, 'minecraftia', 'Example Game' );
+      this.titleTxt = this.add.bitmapText(x, y, 'minecraftia', 'what do we do now' );
       this.titleTxt.align = 'center';
       this.titleTxt.x = this.game.width / 2 - this.titleTxt.textWidth / 2;
 
@@ -24,6 +24,8 @@
 
       this.input.onDown.add(this.onDown, this);
       //this.game.state.start('game');
+      this.game.maxGames = 3;
+      this.game.state.start('game2');
       
     },
 
@@ -32,7 +34,15 @@
     },
 
     onDown: function () {
-      this.game.state.start('game');
+      this.game.state.start('game2');
+
+      /*this.game.i++;
+
+      
+      if(this.game.i > this.game.maxGames){
+        this.game.i = 1;
+      }
+      this.game.state.start('game'+this.game.i);*/
     }
   };
 
