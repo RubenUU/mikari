@@ -16,17 +16,6 @@
       this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
       //this.game.stage.backgroundColor = '#313131';
-
-      this.bullets = this.game.add.group();
-      this.bullets.enableBody = true;
-      this.bullets.physicsBodyType = Phaser.Physics.ARCADE;
-
-      this.bullets.createMultiple(50, 'cool');
-      this.bullets.setAll('checkWorldBounds', true);
-      this.bullets.setAll('outOfBoundsKill', true);
-      this.bullets.setAll('scale.x', 0.5);
-      this.bullets.setAll('scale.y', 0.5);
-      //this.bullets.setAll('body.mass', 100);
       
       this.player = this.game.add.sprite(x, this.game.height- 50, 'cool');
       this.player.anchor.set(0.5);
@@ -41,7 +30,13 @@
 
 
       //this.cool = this.createThings('cool', 30);
-      //this.bad = this.createThings('bad', 30);
+      this.bullets = this.game.createThings({
+          spriteName : 'bad',
+          x : -100,
+          y : -100,
+          velocityX : 0,
+          velocityY : 0
+        });
 
       this.player.cool = true;
       this.player.power = 'cool';
@@ -91,34 +86,6 @@
 
     },
 
-    createThings : function (spriteName, qty, x, y){
-      var sprites = this.game.add.group();
-
-      for (var i = 0; i < qty; i++)
-      {
-        if(x && y){
-          var s = sprites.create(x, y, spriteName);
-        }
-        else{
-          var s = sprites.create(200, 0, spriteName);
-        }
-        //s.animations.add('spin', [0,1,2,3]);
-        //s.play('spin', 20, true);
-        this.game.physics.enable(s, Phaser.Physics.ARCADE);
-        //s.body.velocity.x = this.game.rnd.integerInRange(-100, 100);
-        s.body.velocity.y = 10;
-      }
-
-      //sprites.setAll('body.collideWorldBounds', true);
-      sprites.setAll('body.bounce.x', 0.2);
-      sprites.setAll('body.bounce.y', 0.2);
-      sprites.setAll('body.minBounceVelocity', 0);
-      sprites.setAll('scale.x', 0.5);
-      sprites.setAll('scale.y', 0.5);
-
-      return sprites;
-    },
-
     getPoints : function (sprite){
       sprite.kill();
 
@@ -127,7 +94,7 @@
 
       this.points++;
       this.game.addPoints();
-      
+
     },
 
     collisionHandlerCool: function (player, sprite) {
@@ -191,17 +158,18 @@
     fire: function () {
       if (this.game.time.now > this.nextFire && this.bullets.countDead() > 0)
       {
-          this.nextFire = this.game.time.now + this.fireRate;
 
-          var bullet = this.bullets.getFirstDead();
+        this.nextFire = this.game.time.now + this.fireRate;
 
-          bullet.reset(this.game.rnd.integerInRange(20, this.game.width -20), 0);
+        var bullet = this.bullets.getFirstDead();
 
-          //this.game.physics.arcade.moveToPointer(bullet, 300);
-          bullet.body.velocity.y = 300;
+        bullet.reset(this.game.rnd.integerInRange(20, this.game.width -20), 0);
 
-          bullet.enemyType = (Math.random() < 0.5) ? 'cool' : 'bad';
-          bullet.loadTexture(bullet.enemyType);
+        //this.game.physics.arcade.moveToPointer(bullet, 300);
+        bullet.body.velocity.y = 300;
+
+        bullet.enemyType = (Math.random() < 0.5) ? 'cool' : 'bad';
+        bullet.loadTexture(bullet.enemyType);
 
       }
     },

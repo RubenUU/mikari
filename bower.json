@@ -5,6 +5,7 @@
     ""
   ],
   "dependencies": {
-    "phaser-official": "latest"
+    "phaser-official": "latest",
+    "underscore": "~1.7.0"
   }
 }
