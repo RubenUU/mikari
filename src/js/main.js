@@ -10,6 +10,8 @@ window.onload = function () {
   game.state.add('menu', ns.Menu);
   game.state.add('game1', ns.Game1);
   game.state.add('game2', ns.Game2);
+  game.state.add('game3', ns.Game3);
+  game.state.add('game5', ns.Game5);
   /* yo phaser:state new-state-files-put-here */
 
   game.state.start('boot');

@@ -25,7 +25,7 @@
       this.input.onDown.add(this.onDown, this);
       //this.game.state.start('game');
       this.game.maxGames = 3;
-      this.game.state.start('game2');
+      this.game.state.start('game5');
       
     },
 
@@ -34,7 +34,7 @@
     },
 
     onDown: function () {
-      this.game.state.start('game2');
+      this.game.state.start('game5');
 
       /*this.game.i++;
 
