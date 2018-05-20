@@ -2,35 +2,31 @@
   "name": "what",
   "description": "",
   "readme": "",
-  "repository": "",
+  "repository": "https://github.com/NeatNait/what",
   "version": "0.0.0",
-  "readme": "",
-  "repository": "",
   "dependencies": {},
-
   "devDependencies": {
     "bower": "*",
     "gulp": "*",
-    "gulp-util": "*",
-    "gulp-rimraf": "*",
     "gulp-concat": "*",
+    "gulp-connect": "*",
     "gulp-download": "*",
-    "gulp-rename": "*",
+    "gulp-jshint": "*",
     "gulp-minify-css": "*",
     "gulp-minify-html": "*",
     "gulp-processhtml": "*",
-    "gulp-jshint": "*",
+    "gulp-rename": "*",
+    "gulp-rimraf": "*",
     "gulp-uglify": "*",
-    "gulp-connect": "*",
+    "gulp-util": "*",
     "gulp-watch": "*",
+    "jshint": "^2.9.5",
     "tiny-lr": "*"
   },
-
   "scripts": {
-    "post-install": "node ./node_modules/bower/bin/bower install",
-    "start": "node ./node_modules/gulp/bin/gulp.js",
-
-    "build": "node ./node_modules/gulp/bin/gulp.js build",
-    "lint":  "node ./node_modules/gulp/bin/gulp.js lint"
+    "postinstall": "bower install",
+    "start": "gulp",
+    "build": "gulp build",
+    "lint": "gulp lint"
   }
 }
