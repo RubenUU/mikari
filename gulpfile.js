@@ -15,7 +15,7 @@ paths = {
   assets: 'src/assets/**/*',
   css:    'src/css/*.css',
   libs:   [
-    'src/bower_components/phaser-official/build/phaser.min.js'
+    'node_modules/phaser/dist/phaser.min.js'
   ],
   js:     ['src/js/**/*.js'],
   dist:   './dist/'

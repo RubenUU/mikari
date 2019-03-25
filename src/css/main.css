@@ -7,11 +7,10 @@ html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: #000;
+  background: #666;
 }
 
-.game {
-  width: 640px;
-  height: 480px;
+canvas {
   margin: 20px auto;
+  display: inherit;
 }

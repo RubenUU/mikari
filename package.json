@@ -2,9 +2,11 @@
   "name": "what",
   "description": "",
   "readme": "",
-  "repository": "https://github.com/NeatNait/what",
+  "repository": "https://github.com/RubenUU/what",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "phaser": "^3.16.2"
+  },
   "devDependencies": {
     "bower": "*",
     "gulp": "*",
