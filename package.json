@@ -5,6 +5,7 @@
   "repository": "https://github.com/RubenUU/what",
   "version": "0.0.0",
   "dependencies": {
+    "natives": "^1.1.6",
     "phaser": "^3.16.2"
   },
   "devDependencies": {
